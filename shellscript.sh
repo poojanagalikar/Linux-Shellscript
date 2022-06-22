@@ -1,0 +1,14 @@
+#!/bin/bash
+USER=root
+PASS=Admin@1234567
+mysql -h localhost -u$USER -p$PASS<< EOF
+CREATE DATABASE IF NOT EXISTS user;
+USE user;
+CREATE TABLE IF NOT EXISTS user.user1(
+id INTEGER NOT NULL AUTO_INCREMENT,
+firstname VARCHAR(50), lastname VARCHAR(50), dob DATE, age VARCHAR (10),
+PRIMARY KEY (id)
+);
+LOAD DATA INFILE './user.csv' INTO TABLE user.user1 FIELDS TERMINATED BY ',' LINES TERMINATED BY '\n' IGNORE 1 ROWS;
+SELECT * FROM user.user1;
+EOF
